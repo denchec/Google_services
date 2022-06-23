@@ -6,7 +6,7 @@ from googleapiclient.discovery import build
 
 def create_table(service, creds):
     spreadsheet = service.spreadsheets().create(body={
-        'properties': {'title': 'Rare', 'locale': 'ru_RU'},
+        'properties': {'title': 'Rare2', 'locale': 'ru_RU'},
         'sheets': [{'properties': {'sheetType': 'GRID',
                                    'sheetId': 0,
                                    'title': 'list1',
@@ -59,6 +59,12 @@ def update_data(service, spreadsheet_id):
     }).execute()
 
 
+def get_all_data(service, spreadsheet_id):
+    results = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range="A1:E8")
+    response = results.execute()
+    return response
+
+
 def main():
     creds = Credentials.from_service_account_file('token.json')
 
@@ -68,7 +74,9 @@ def main():
     data_recording(service, spreadsheet['spreadsheetId'])
     clear_data(service, spreadsheet['spreadsheetId'])
     update_data(service, spreadsheet['spreadsheetId'])
+    data_after_changes = get_all_data(service, spreadsheet['spreadsheetId'])
 
+    print(data_after_changes)
     print(spreadsheet['spreadsheetUrl'])
 
 
