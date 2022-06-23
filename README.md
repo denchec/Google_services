@@ -1,1 +1,1 @@
-Authorization in Google serveces and editing Google table
+Authorization in Google services and editing Google table
