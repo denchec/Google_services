@@ -1,0 +1,1 @@
+Authorization in Google serveces and editing Google table
